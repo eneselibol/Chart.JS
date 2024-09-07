@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <style>
+        h6 {
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        input[type="number"] {
+            font-family: "Times New Roman", Times, serif;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="container-fluid" style="background-color: #f6f5f7">
+<form>
+    <div class="container-fluid p-2">
+        <div class="row" style="float: none; margin: 0 auto;">
+            <div class="col-sm">
+                <h6 class="label label-default mb-0">Red</h6>
+                <input type="number" value="30" max="99" id="data1">
+            </div>
+
+            <div class="col-sm">
+                <h6 class="label label-default mb-0">Blue</h6>
+                <input type="number" value="40" max="99" id="data2">
+            </div>
+
+            <div class="col-sm">
+                <h6 class="label label-default mb-0">Yellow</h6>
+                <input type="number" value="50" max="99" id="data3">
+            </div>
+
+            <div class="col-sm">
+                <h6 class="label label-default mb-0">Green</h6>
+                <input type="number" value="60" max="99" id="data4">
+            </div>
+            <div class="col-sm ml-2 mt-2" style="align-content: center;">
+                <input class="btn btn-primary" onclick="createCharts()" type="submit">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col w-50 border">
+                <div class="chart-container pl-5" style="position: relative; height:40vh; width:80vw">
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <h6 style="padding-left: 150px">Pie Chart</h6>
+            </div>
+            <div class="col w-50 border">
+                <div class="chart-container pt-5" style="position: relative; height:42vh; width:45vw">
+                    <canvas id="barChart"></canvas>
+                </div>
+                <h6 style="padding-left: 250px">Bar Chart</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col w-50 border">
+                <div class="chart-container pl-5" style="position: relative; height:40vh; width:80vw">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+                <h6 style="padding-left: 150px">Doughnut Chart</h6>
+            </div>
+            <div class="col w-50 border">
+                <div class="chart-container pt-5" style="position: relative; height:42vh; width:45vw">
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <h6 style="padding-left: 250px">Line Chart</h6>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>
+    createCharts();
+
+    function createCharts() {
+        const barChart = document.getElementById('barChart').getContext("2d");
+        const pieChart = document.getElementById('pieChart').getContext("2d");
+        const lineChart = document.getElementById('lineChart').getContext("2d");
+        const doughnutChart = document.getElementById('doughnutChart').getContext("2d");
+        const data = {
+            labels: ['Red', 'Blue', 'Yellow', 'Green'],
+            datasets: [{
+                label: '',
+                data: [document.getElementById("data1").value, document.getElementById("data2").value, document.getElementById("data3").value, document.getElementById("data4").value],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(34,196,109)'
+                ],
+                hoverOffset: 4,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }]
+        };
+
+        new Chart(barChart, {
+            type: 'bar',
+            data: data
+        });
+
+        new Chart(pieChart, {
+            type: 'pie',
+            data: data
+        });
+        new Chart(lineChart, {
+            type: 'line',
+            data: data
+        });
+        new Chart(doughnutChart, {
+            type: 'doughnut',
+            data: data
+        });
+    }
+</script>
+</body>
+</html>
